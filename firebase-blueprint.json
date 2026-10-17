@@ -1,0 +1,96 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and spiritual preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "theme": { "type": "string", "enum": ["light", "dark"] },
+        "bibleTranslation": { "type": "string", "enum": ["NIV", "ESV", "NLT", "KJV"] },
+        "responseLength": { "type": "string", "enum": ["concise", "balanced", "in-depth"] },
+        "prayerStyle": { "type": "string", "enum": ["gentle", "conversational", "traditional"] },
+        "favoritedVerseIds": { "type": "array" }
+      },
+      "required": ["uid"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A conversational chat message between user and SoulGuide",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sender": { "type": "string", "enum": ["user", "ai"] },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "mode": { "type": "string" }
+      },
+      "required": ["id", "sender", "text"]
+    },
+    "JournalEntry": {
+      "title": "JournalEntry",
+      "description": "A personal reflective journal entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "content": { "type": "string" },
+        "mood": { "type": "string" },
+        "verseAttachment": { "type": "object" },
+        "prayerAttachment": { "type": "string" }
+      },
+      "required": ["id", "content", "date"]
+    },
+    "GoalItem": {
+      "title": "GoalItem",
+      "description": "A personal habit or spiritual growth goal",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "completed": { "type": "boolean" },
+        "streak": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "completed"]
+    },
+    "SavedPrayer": {
+      "title": "SavedPrayer",
+      "description": "A saved prayer item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "topic": { "type": "string" },
+        "prayer": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "isFavorite": { "type": "boolean" }
+      },
+      "required": ["id", "topic", "prayer"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Conversation messages for the user"
+    },
+    "/users/{userId}/journal/{entryId}": {
+      "schema": "JournalEntry",
+      "description": "Journal entries created by the user"
+    },
+    "/users/{userId}/goals/{goalId}": {
+      "schema": "GoalItem",
+      "description": "Goals and spiritual habits tracked by the user"
+    },
+    "/users/{userId}/prayers/{prayerId}": {
+      "schema": "SavedPrayer",
+      "description": "Saved prayers generated for the user"
+    },
+    "/users/{userId}/preferences/{docId}": {
+      "schema": "User",
+      "description": "User preferences and settings"
+    }
+  }
+}

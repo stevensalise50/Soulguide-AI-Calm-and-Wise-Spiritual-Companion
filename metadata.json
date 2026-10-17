@@ -1,0 +1,6 @@
+{
+  "name": "SoulGuide",
+  "description": "AI companion, mentor, and wise friend offering compassionate guidance, life lessons, daily encouragement, biblical wisdom, journaling, prayer, and goals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
